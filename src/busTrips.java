@@ -6,11 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.ArrayList;
-
-import static java.lang.Math.abs;
+import java.util.Objects;
 
 public class busTrips {
-    public static <Int> void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
         if (args.length == 3) {
             LocalTime Current_time = LocalTime.now();
 
@@ -38,17 +37,26 @@ public class busTrips {
             System.out.println("Postajališče "+ stop_name);
 
             StopTime[] stop_times = store.getAllStopTimes().toArray(new StopTime[0]);
-            ArrayList<AgencyAndId> trip_ids = new ArrayList<>();
 
             for (StopTime times : stop_times){
                 StopLocation stop_id = times.getStop();
                 if (stop_id == stop){
-                    AgencyAndId trip_id = times.getTrip().getId();
+                    Trip trip_id = times.getTrip();
+                    Route route = trip_id.getRoute();
+
                     LocalTime arrival_time = LocalTime.ofSecondOfDay(times.getArrivalTime());
                     int calculation = times.getArrivalTime() - Current_time.toSecondOfDay();
+                    int relative_time = (Current_time.toSecondOfDay() - times.getArrivalTime()) / 60;
 
                     if(calculation <= 7200 && calculation >= 0){
-                        System.out.println(arrival_time);
+                        System.out.println(route.getShortName());
+                        if(Objects.equals(oblika_casa, "absolute")){
+                            System.out.println(arrival_time);
+                        }
+                        else if(Objects.equals(oblika_casa, "relative")){
+                            System.out.println(relative_time + "min");
+                        }
+
                     }
                 }
             }
