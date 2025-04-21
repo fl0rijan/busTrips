@@ -23,7 +23,7 @@ public class busTrips {
             String oblika_casa = args[2];
 
             GtfsReader reader = new GtfsReader();
-            reader.setInputLocation(new File("gtfs"));
+            reader.setInputLocation(new File("../gtfs"));
 
             GtfsDaoImpl store = new GtfsDaoImpl();
             reader.setEntityStore(store);
@@ -40,7 +40,7 @@ public class busTrips {
             }
 
             String stop_name = stop.getName();
-            System.out.println("Postajališče " + stop_name);
+            System.out.println("Postajalisce " + stop_name);
             StopTime[] stop_times = store.getAllStopTimes().toArray(new StopTime[0]);
 
             for (StopTime times : stop_times) {
