@@ -1,8 +1,7 @@
 ## Bus trips
 args: buxTrips.java <stop_id> <count_of_arrival_times_for_each_route> <absolute|relative>
 
-javac -cp ".;..\lib\*;" .\busTrips.java
-
-java -Dorg.slf4j.simpleLogger.defaultLogLevel=off -cp ".;..\lib\*;" .\busTrips.java 5 5 absolute
+example: 
+java -cp ".;..\lib\*;" .\busTrips.java 5 5 absolute
 
 run in cmd: \src> .\compile.bat
